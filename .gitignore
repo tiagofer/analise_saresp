@@ -127,3 +127,23 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+ausencias_por_servidor/
+carga_horaria_docente/
+cluster_metodo_melhoria/
+dicionarios/
+disciplina_sem_docente/
+endereco_escolas/
+forma_servidor/
+historico_diretores_profess
+historico_matriculas_turma/
+indice_desenvolvimento_escola/
+instalacoes_fisicas_escolas/
+saresp/
+servidores_ativos/
+desafio_educa/
+api/
+analise_exploratoria.ipynb
+
+front_saresp.py
+test.py
