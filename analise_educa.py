@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 import datetime as dt 
 import plotly.express as px
+import plotly.graph_objects as go
 # %%
 ########Função para carregar todos os arquivos csv em uma pasta e converter em dataframe########
 def load_all_csv(folder_name,sep):
@@ -117,9 +118,6 @@ df_completo['medprof'] = df_completo['medprof'].str.replace(',','.').astype('flo
 # %%
 df_completo['arquivo'] = pd.to_datetime(df_completo['arquivo'],format='%Y')
 # %%
-#avaliação do novo dataframe criado
-df_completo = df_completo.dropna()
-# %%
 #visualização do novo dataframe
 create_df_aux(df_completo)
 
@@ -131,3 +129,15 @@ df_completo.to_csv('dados/saresp_resultado.csv',sep=';')
 # %%
 df_escolas = df_completo.groupby('arquivo').nunique()
 px.line(df_escolas,x=df_escolas.index,y='CODESC')
+
+# %%
+df_competencias = df_completo.groupby(['ds_comp','arquivo'])['medprof'].mean().reset_index()
+
+# %%
+fig = go.Figure()
+fig = (px.scatter(x=df_competencias['arquivo'],y=df_competencias['medprof'],
+color=df_competencias['ds_comp'],labels={
+    'x' : 'Ano',
+    'y':'Nota Competência'
+}).update_traces(mode='lines+markers'))
+fig.show()
